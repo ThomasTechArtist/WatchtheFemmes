@@ -1,7 +1,7 @@
 {
   "name": "Watch the Femmes",
   "schema_version": 1,
-  "checked_at": "2026-10-19T04:25:19.529100+00:00",
+  "checked_at": "2026-10-19T04:24:17.479780+00:00",
   "races": [
     {
       "key": "tour",
@@ -62,8 +62,8 @@
           "initials": "PC"
         }
       ],
-      "checked_at": "2026-10-19T04:25:19.529100+00:00",
-      "last_success_at": "2026-10-19T04:25:19.529100+00:00",
+      "checked_at": "2026-10-19T04:24:17.479780+00:00",
+      "last_success_at": "2026-10-19T04:24:17.479780+00:00",
       "stale": false
     },
     {
@@ -80,7 +80,7 @@
           "team": "FDJ UNITED - SUEZ",
           "time": "29:54:19",
           "gap": "0:00",
-          "portrait_url": "https://static2.giroditaliawomen.it/wp-content/uploads/2026/05/Qr6PFPGKA9ESI8vsvXRW_290526-101419-150x150.png",
+          "portrait_url": null,
           "initials": "DV"
         },
         {
@@ -120,8 +120,8 @@
           "initials": "NF"
         }
       ],
-      "checked_at": "2026-10-19T04:25:19.529100+00:00",
-      "last_success_at": "2026-10-19T04:25:19.529100+00:00",
+      "checked_at": "2026-10-19T04:24:17.479780+00:00",
+      "last_success_at": "2026-10-19T04:24:17.479780+00:00",
       "stale": false
     },
     {
@@ -183,8 +183,8 @@
           "initials": "JB"
         }
       ],
-      "checked_at": "2026-10-19T04:25:19.529100+00:00",
-      "last_success_at": "2026-10-19T04:25:19.529100+00:00",
+      "checked_at": "2026-10-19T04:24:17.479780+00:00",
+      "last_success_at": "2026-10-19T04:24:17.479780+00:00",
       "stale": false
     }
   ],

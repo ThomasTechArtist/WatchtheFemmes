@@ -101,11 +101,7 @@ def parse_standings(key, html):
                 "gap": text(row.select_one(".distacco")),
                 "portrait_url": None,
             })
-        leader = soup.select_one('a.single-maglia-info[data-tab="tab-classifica-CLGEN"]')
-        if rows and leader:
-            label = leader.select_one('h5')
-            if label and sorted(text(label).casefold().split()) == sorted(rows[0]['rider'].casefold().split()):
-                rows[0]['portrait_url'] = portrait_url(leader.select_one('img'))
+        # Giro jersey graphics are not rider portraits; retain initials fallback.
         stage = None
     else:
         heading = next((text(h) for h in soup.select("h1,h2,h3") if re.search(r"20\d{2}\s+Rankings\s*-\s*Stage\s+\d+", text(h))), "")

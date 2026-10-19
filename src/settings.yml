@@ -2,7 +2,7 @@
 name: Watch the Femmes
 strategy: polling
 refresh_interval: 30
-polling_url: https://raw.githubusercontent.com/ThomasTechArtist/WatchtheFemmes/main/data/latest.json
+polling_url: https://raw.githubusercontent.com/ThomasTechArtist/WatchtheFemmes/main/data/latest.json?v=portraits-2
 polling_headers: ''
 polling_verb: GET
 no_screen_padding: 'yes'
