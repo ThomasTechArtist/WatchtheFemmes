@@ -6,6 +6,7 @@ import json
 from pathlib import Path
 import re
 from urllib.request import Request, urlopen
+from urllib.parse import urljoin, urlsplit
 
 from bs4 import BeautifulSoup
 from display import build_display, load_calendar
@@ -21,6 +22,62 @@ def text(node):
     if node is None:
         raise ValueError("Required source field missing")
     return node.get_text(" ", strip=True)
+
+
+def portrait_url(node):
+    """Only use organiser-hosted portraits, never flags or arbitrary page images."""
+    if node is None:
+        return None
+    for value in (node.get('data-src', ''), node.get('src', '')):
+        url = value.split('|')[0]
+        parts = urlsplit(url)
+        if parts.scheme == 'https' and parts.hostname in {'img.aso.fr', 'static2.giroditaliawomen.it'}:
+            return url
+    return None
+
+
+def parse_profile_portrait(html, profile_url):
+    soup = BeautifulSoup(html, 'html.parser')
+    canonical = soup.select_one('link[rel="canonical"]')
+    if canonical and urlsplit(canonical.get('href', '')).path.rstrip('/') != urlsplit(profile_url).path.rstrip('/'):
+        return None
+    main = soup.select('img.riderProfile__img')
+    if len(main) == 1 and portrait_url(main[0]):
+        return portrait_url(main[0])
+    # Team mates also have images on profile pages. Match this rider's link,
+    # rather than picking the first photo (which may be a different rider).
+    for anchor in soup.select('a[href]'):
+        if urlsplit(urljoin(profile_url, anchor['href'])).path.rstrip('/') == urlsplit(profile_url).path.rstrip('/'):
+            image = anchor.select_one('img.riderFocus__img')
+            if portrait_url(image):
+                return portrait_url(image)
+    candidates = [i for i in soup.select('img.pageIntroJerseys__img') if not i.find_parent('a')]
+    return portrait_url(candidates[0]) if len(candidates) == 1 else None
+
+
+def fetch_html(url):
+    request = Request(url, headers={"User-Agent": "WatchTheFemmes/0.2 (+https://github.com/ThomasTechArtist/WatchtheFemmes)"})
+    with urlopen(request, timeout=30) as response:
+        html = response.read(4_000_001)
+        if len(html) > 4_000_000:
+            raise ValueError("Source exceeds size limit")
+        return html.decode(response.headers.get_content_charset() or "utf-8")
+
+
+def enrich_portraits(race, fetcher=fetch_html):
+    def enrich(rider):
+        if not rider.get('portrait_url') and rider.get('profile_url'):
+            try:
+                rider['portrait_url'] = parse_profile_portrait(fetcher(rider['profile_url']), rider['profile_url'])
+            except Exception:
+                # Missing optional photography must not hide valid standings.
+                rider['portrait_url'] = None
+        parts = rider['rider'].replace('.', '').split()
+        rider['initials'] = ''.join(p[0] for p in ([parts[0], parts[-1]] if len(parts) > 1 else parts)).upper()
+        return rider
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        race['standings'] = list(executor.map(enrich, race['standings']))
+    return race
 
 
 def parse_standings(key, html):
@@ -42,7 +99,13 @@ def parse_standings(key, html):
                 "team": text(row.select_one(".team")),
                 "time": text(row.select_one(".tempo")),
                 "gap": text(row.select_one(".distacco")),
+                "portrait_url": None,
             })
+        leader = soup.select_one('a.single-maglia-info[data-tab="tab-classifica-CLGEN"]')
+        if rows and leader:
+            label = leader.select_one('h5')
+            if label and sorted(text(label).casefold().split()) == sorted(rows[0]['rider'].casefold().split()):
+                rows[0]['portrait_url'] = portrait_url(leader.select_one('img'))
         stage = None
     else:
         heading = next((text(h) for h in soup.select("h1,h2,h3") if re.search(r"20\d{2}\s+Rankings\s*-\s*Stage\s+\d+", text(h))), "")
@@ -66,7 +129,12 @@ def parse_standings(key, html):
             if len(cells) != len(headers):
                 raise ValueError("Standings row does not match header")
             fields = dict(zip(headers, map(text, cells)))
-            rows.append({"rank": int(fields["rank"]), "rider": fields["rider"], "team": fields["team"], "time": fields["times"], "gap": fields["gap"]})
+            profile_link = row.select_one('td.runner a[href]')
+            profile = urljoin(SOURCES[key][1], profile_link['href']) if profile_link else None
+            if profile and (urlsplit(profile).hostname != urlsplit(SOURCES[key][1]).hostname or not urlsplit(profile).path.startswith('/en/rider/')):
+                profile = None
+            rows.append({"rank": int(fields["rank"]), "rider": fields["rider"], "team": fields["team"], "time": fields["times"], "gap": fields["gap"],
+                         "portrait_url": portrait_url(row.select_one('img.rankingTables__row__profile--picture')), 'profile_url': profile})
             if len(rows) == 5:
                 break
     if edition is None:
@@ -79,13 +147,7 @@ def parse_standings(key, html):
 
 
 def fetch_race(key):
-    request = Request(SOURCES[key][1], headers={"User-Agent": "WatchTheFemmes/0.1 (+https://github.com/ThomasTechArtist/WatchtheFemmes)"})
-    with urlopen(request, timeout=30) as response:
-        html = response.read(4_000_001)
-        if len(html) > 4_000_000:
-            raise ValueError("Source exceeds size limit")
-        html = html.decode(response.headers.get_content_charset() or "utf-8")
-    return parse_standings(key, html)
+    return enrich_portraits(parse_standings(key, fetch_html(SOURCES[key][1])))
 
 
 def collect(previous=None, fetcher=fetch_race, now=None):

@@ -7,11 +7,12 @@ Women's professional cycling for a TRMNL e-ink display: Tour de France Femmes, G
 - Installed private TRMNL plugin: **Watch the Femmes**, instance `511645`.
 - Between races: the three confirmed forthcoming Grand Tours, countdowns and latest published GC leaders, with edition labels.
 - During a configured race: its top five overall riders, teams and gaps, with stage number when the source supplies one. Prior editions are never presented as the current race.
+- GC rider portraits are linked from official organiser image hosts. Tour and Vuelta profiles supply the top five; Giro currently supplies its GC leader. Missing portraits show initials, and optional image failures do not hide standings.
 - Source failures preserve the last successful results and mark them stale. A feed older than 48 hours displays an overdue notice.
 - GitHub Actions publishes public factual JSON. Collection is daily between configured races and approximately every 30 minutes during them. GitHub scheduled jobs can be delayed; this is not second-by-second tracking.
 - TRMNL polls the JSON at a maximum frequency of every 30 minutes. Rendering also depends on the device checking in.
 
-The first automatic publication and GitHub CI both passed. Twelve unit tests cover source parsing, failure preservation, race boundaries, edition isolation and refresh cadence. The actual TRMNL preview was checked for readable layout and real polled data.
+The first automatic publication and GitHub CI both passed. Seventeen unit tests cover source parsing, failure preservation, race boundaries, edition isolation and refresh cadence. The actual TRMNL preview was checked for readable layout and real polled data.
 
 ## Install or update the screen
 

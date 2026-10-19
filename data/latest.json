@@ -1,7 +1,7 @@
 {
   "name": "Watch the Femmes",
   "schema_version": 1,
-  "checked_at": "2026-10-19T02:57:18.512432+00:00",
+  "checked_at": "2026-10-19T04:24:17.479780+00:00",
   "races": [
     {
       "key": "tour",
@@ -16,39 +16,54 @@
           "rider": "D. VOLLERING",
           "team": "FDJ UNITED-SUEZ",
           "time": "30h 54' 51''",
-          "gap": "-"
+          "gap": "-",
+          "portrait_url": "https://img.aso.fr/core_app/img-cycling-trf-png/11/38865/0:0,400:400-300-0-70/0d7bd",
+          "profile_url": "https://www.letourfemmes.fr/en/rider/11/fdj-united-suez/demi-vollering",
+          "initials": "DV"
         },
         {
           "rank": 2,
           "rider": "K. NIEWIADOMA-PHINNEY",
           "team": "CANYON//SRAM",
           "time": "30h 56' 09''",
-          "gap": "+ 00h 01' 18''"
+          "gap": "+ 00h 01' 18''",
+          "portrait_url": "https://img.aso.fr/core_app/img-cycling-trf-png/21/38848/0:0,400:400-300-0-70/317f7",
+          "profile_url": "https://www.letourfemmes.fr/en/rider/21/canyon-sram/katarzyna-niewiadoma-phinney",
+          "initials": "KN"
         },
         {
           "rank": 3,
           "rider": "E. LONGO BORGHINI",
           "team": "UAE Team L’IMAD",
           "time": "30h 59' 10''",
-          "gap": "+ 00h 04' 19''"
+          "gap": "+ 00h 04' 19''",
+          "portrait_url": "https://img.aso.fr/core_app/img-cycling-trf-png/35/38858/0:0,400:400-300-0-70/3c5fb",
+          "profile_url": "https://www.letourfemmes.fr/en/rider/35/uae-team-l-imad/elisa-longo-borghini",
+          "initials": "EB"
         },
         {
           "rank": 4,
           "rider": "A. NIEDERMAIER",
           "team": "CANYON//SRAM",
           "time": "31h 00' 01''",
-          "gap": "+ 00h 05' 10''"
+          "gap": "+ 00h 05' 10''",
+          "portrait_url": "https://img.aso.fr/core_app/img-cycling-trf-png/25/38557/0:0,660:1000-300-0-70/e9a64",
+          "profile_url": "https://www.letourfemmes.fr/en/rider/25/canyon-sram/antonia-niedermaier",
+          "initials": "AN"
         },
         {
           "rank": 5,
           "rider": "P. BLASI CAIROL",
           "team": "UAE Team L’IMAD",
           "time": "31h 01' 04''",
-          "gap": "+ 00h 06' 13''"
+          "gap": "+ 00h 06' 13''",
+          "portrait_url": "https://img.aso.fr/core_app/img-cycling-trf-png/32/38561/0:0,660:1000-300-0-70/a7689",
+          "profile_url": "https://www.letourfemmes.fr/en/rider/32/uae-team-l-imad/paula-blasi-cairol",
+          "initials": "PC"
         }
       ],
-      "checked_at": "2026-10-19T02:57:18.512432+00:00",
-      "last_success_at": "2026-10-19T02:57:18.512432+00:00",
+      "checked_at": "2026-10-19T04:24:17.479780+00:00",
+      "last_success_at": "2026-10-19T04:24:17.479780+00:00",
       "stale": false
     },
     {
@@ -64,39 +79,49 @@
           "rider": "Demi VOLLERING",
           "team": "FDJ UNITED - SUEZ",
           "time": "29:54:19",
-          "gap": "0:00"
+          "gap": "0:00",
+          "portrait_url": "https://static2.giroditaliawomen.it/wp-content/uploads/2026/05/Qr6PFPGKA9ESI8vsvXRW_290526-101419-150x150.png",
+          "initials": "DV"
         },
         {
           "rank": 2,
           "rider": "Antonia NIEDERMAIER",
           "team": "CANYON//SRAM ZONDACRYPTO",
           "time": "29:54:49",
-          "gap": "0:30"
+          "gap": "0:30",
+          "portrait_url": null,
+          "initials": "AN"
         },
         {
           "rank": 3,
           "rider": "Anna VAN DER BREGGEN",
           "team": "TEAM SD WORX - PROTIME",
           "time": "29:55:56",
-          "gap": "01:37"
+          "gap": "01:37",
+          "portrait_url": null,
+          "initials": "AB"
         },
         {
           "rank": 4,
           "rider": "Elisa LONGO BORGHINI",
           "team": "UAE TEAM ADQ",
           "time": "29:57:03",
-          "gap": "02:44"
+          "gap": "02:44",
+          "portrait_url": null,
+          "initials": "EB"
         },
         {
           "rank": 5,
           "rider": "Niamh FISHER-BLACK",
           "team": "LIDL - TREK",
           "time": "29:57:45",
-          "gap": "03:26"
+          "gap": "03:26",
+          "portrait_url": null,
+          "initials": "NF"
         }
       ],
-      "checked_at": "2026-10-19T02:57:18.512432+00:00",
-      "last_success_at": "2026-10-19T02:57:18.512432+00:00",
+      "checked_at": "2026-10-19T04:24:17.479780+00:00",
+      "last_success_at": "2026-10-19T04:24:17.479780+00:00",
       "stale": false
     },
     {
@@ -112,39 +137,54 @@
           "rider": "PAULA BLASI CAIROL",
           "team": "UAE TEAM ADQ",
           "time": "22h 17' 03''",
-          "gap": "-"
+          "gap": "-",
+          "portrait_url": "https://img.aso.fr/core_app/img-cycling-lvf-png/10147955595/6831/0:0,400:400-200-0-80/ead0d",
+          "profile_url": "https://www.lavueltafemenina.es/en/rider/2/uae-team-adq/paula-blasi-cairol",
+          "initials": "PC"
         },
         {
           "rank": 2,
           "rider": "ANNA VAN DER BREGGEN",
           "team": "TEAM SD WORX - PROTIME",
           "time": "22h 17' 27''",
-          "gap": "+ 00h 00' 24''"
+          "gap": "+ 00h 00' 24''",
+          "portrait_url": "https://img.aso.fr/core_app/img-cycling-lvf-png/10005972655/6840/0:0,400:400-200-0-80/92843",
+          "profile_url": "https://www.lavueltafemenina.es/en/rider/26/team-sd-worx-protime/anna-van-der-breggen",
+          "initials": "AB"
         },
         {
           "rank": 3,
           "rider": "MARION BUNEL",
           "team": "TEAM VISMA | LEASE A BIKE",
           "time": "22h 17' 52''",
-          "gap": "+ 00h 00' 49''"
+          "gap": "+ 00h 00' 49''",
+          "portrait_url": "https://img.aso.fr/core_app/img-cycling-lvf-png/10066934529/6766/0:0,400:400-200-0-80/e5bf2",
+          "profile_url": "https://www.lavueltafemenina.es/en/rider/31/team-visma-lease-a-bike/marion-bunel",
+          "initials": "MB"
         },
         {
           "rank": 4,
           "rider": "USOA OSTOLAZA ZABALA",
           "team": "LABORAL KUTXA - FUNDACION EUSKADI",
           "time": "22h 19' 34''",
-          "gap": "+ 00h 02' 31''"
+          "gap": "+ 00h 02' 31''",
+          "portrait_url": "https://img.aso.fr/core_app/img-cycling-lvf-png/10107247022/6798/0:0,400:400-200-0-80/378ff",
+          "profile_url": "https://www.lavueltafemenina.es/en/rider/111/laboral-kutxa-fundacion-euskadi/usoa-ostolaza-zabala",
+          "initials": "UZ"
         },
         {
           "rank": 5,
           "rider": "JULIETTE BERTHET",
           "team": "FDJ UNITED-SUEZ",
           "time": "22h 19' 39''",
-          "gap": "+ 00h 02' 36''"
+          "gap": "+ 00h 02' 36''",
+          "portrait_url": "https://img.aso.fr/core_app/img-cycling-lvf-png/10009749894/6926/0:0,400:400-200-0-80/f0454",
+          "profile_url": "https://www.lavueltafemenina.es/en/rider/11/fdj-united-suez/juliette-berthet",
+          "initials": "JB"
         }
       ],
-      "checked_at": "2026-10-19T02:57:18.512432+00:00",
-      "last_success_at": "2026-10-19T02:57:18.512432+00:00",
+      "checked_at": "2026-10-19T04:24:17.479780+00:00",
+      "last_success_at": "2026-10-19T04:24:17.479780+00:00",
       "stale": false
     }
   ],

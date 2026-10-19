@@ -21,6 +21,14 @@
   .femmes .gc .gap { width:150px;text-align:right;font-size:18px; }
   .femmes .team { display:block;font-size:12px;margin-top:3px; }
   .femmes .notice { font-size:14px;font-weight:650; }
+  .femmes .rider-line { display:flex;align-items:center;gap:8px;min-width:0; }
+  .femmes .rider-line .winner { font-size:16px;margin:0; }
+  .femmes .portrait { display:inline-flex;position:relative;align-items:center;justify-content:center;flex-shrink:0;width:48px;height:56px;overflow:hidden;background:white; }
+  .femmes .portrait .initials { font-size:15px;font-weight:700;border:1px solid black;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center; }
+  .femmes .portrait img { position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center top;filter:grayscale(1);background:white; }
+  .femmes .gc td { padding:5px; }
+  .femmes .gc .portrait { width:42px;height:48px; }
+  .femmes .gc .rider-name { min-width:0; }
 </style>
 {% assign now_ts = trmnl.system.timestamp_utc | plus: 0 %}
 {% assign checked_ts = checked_at | date: '%s' | plus: 0 %}
@@ -45,7 +53,7 @@
     <div><h2>{{ active.name | escape }} {{ active.edition }}</h2><div class="small">Latest published general classification{% if focus.stage %} · Stage {{ focus.stage }}{% endif %}</div></div>
     {% if focus.standings.size > 0 %}
       {% if focus.stale %}<div class="notice">Source unavailable · showing last successful results</div>{% endif %}
-      <table class="gc"><tbody>{% for rider in focus.standings limit:5 %}<tr><td class="rank">{{ rider.rank }}</td><td>{{ rider.rider | escape }}<span class="team">{{ rider.team | escape }}</span></td><td class="gap">{% if rider.rank == 1 %}Leader{% else %}{{ rider.gap | escape }}{% endif %}</td></tr>{% endfor %}</tbody></table>
+      <table class="gc"><tbody>{% for rider in focus.standings limit:5 %}<tr><td class="rank">{{ rider.rank }}</td><td><div class="rider-line"><span class="portrait"><span class="initials">{{ rider.initials | default: '?' | escape }}</span>{% if rider.portrait_url %}<img class="image" src="{{ rider.portrait_url | escape }}" alt="{{ rider.rider | escape }}" onerror="this.remove()">{% endif %}</span><span class="rider-name">{{ rider.rider | escape }}<span class="team">{{ rider.team | escape }}</span></span></div></td><td class="gap">{% if rider.rank == 1 %}Leader{% else %}{{ rider.gap | escape }}{% endif %}</td></tr>{% endfor %}</tbody></table>
     {% else %}<h2>Awaiting {{ active.edition }} standings</h2><div class="date">Results will appear after they are published.</div>{% endif %}
   {% else %}
     <div>
@@ -61,7 +69,7 @@
       {% if shown == 0 %}<h2>Next season's dates awaiting confirmation</h2>{% endif %}
     </div>
     <div class="eyebrow">Latest published GC leaders</div>
-    <div class="results">{% for race in races %}<div class="podium"><h2>{% case race.key %}{% when 'tour' %}Tour de France{% when 'giro' %}Giro Women{% else %}Vuelta Femenina{% endcase %}</h2><div class="small">{{ race.edition }}{% if race.stage %} · Stage {{ race.stage }}{% endif %}</div><div class="winner">{% if race.standings.size > 0 %}{{ race.standings.first.rider | escape }}{% else %}Unavailable{% endif %}</div>{% if race.stale %}<div class="small">Last good data · {{ race.last_success_at | date: '%d %b' }}</div>{% endif %}</div>{% endfor %}</div>
+    <div class="results">{% for race in races %}{% assign leader = race.standings.first %}<div class="podium"><h2>{% case race.key %}{% when 'tour' %}Tour de France{% when 'giro' %}Giro Women{% else %}Vuelta Femenina{% endcase %}</h2><div class="small">{{ race.edition }}{% if race.stage %} · Stage {{ race.stage }}{% endif %}</div><div class="rider-line"><span class="portrait"><span class="initials">{{ leader.initials | default: '?' | escape }}</span>{% if leader.portrait_url %}<img class="image" src="{{ leader.portrait_url | escape }}" alt="{{ leader.rider | escape }}" onerror="this.remove()">{% endif %}</span><div class="winner">{% if leader %}{{ leader.rider | escape }}{% else %}Unavailable{% endif %}</div></div>{% if race.stale %}<div class="small">Last good data · {{ race.last_success_at | date: '%d %b' }}</div>{% endif %}</div>{% endfor %}</div>
   {% endif %}
 </div>
 </div>
