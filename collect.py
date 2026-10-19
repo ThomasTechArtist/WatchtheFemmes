@@ -8,6 +8,7 @@ import re
 from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
+from display import build_display, load_calendar
 
 SOURCES = {
     "tour": ("Tour de France Femmes", "https://www.letourfemmes.fr/en/rankings"),
@@ -99,7 +100,9 @@ def collect(previous=None, fetcher=fetch_race, now=None):
             return {"key": key, "name": SOURCES[key][0], "source_url": SOURCES[key][1], "checked_at": now, "stale": True, "error": str(exc), "standings": []}
     with ThreadPoolExecutor(max_workers=3) as executor:
         races = list(executor.map(one, SOURCES))
-    return {"name": "Watch the Femmes", "schema_version": 1, "checked_at": now, "races": races}
+    result = {"name": "Watch the Femmes", "schema_version": 1, "checked_at": now, "races": races, "calendar": load_calendar()}
+    result['display'] = build_display(result)
+    return result
 
 
 def main():

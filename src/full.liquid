@@ -1,0 +1,68 @@
+<style>
+  .femmes { width:100%;height:100%;display:flex;flex-direction:column;gap:14px; }
+  .femmes h1 { font-size:31px;font-weight:750;line-height:1.1;margin:0; }
+  .femmes h2 { font-size:21px;font-weight:700;margin:0;line-height:1.15; }
+  .femmes .eyebrow { font-size:13px;font-weight:650;letter-spacing:1px;text-transform:uppercase; }
+  .femmes .head { display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid black;padding-bottom:10px; }
+  .femmes .head-note { text-align:right;font-size:14px;line-height:1.4; }
+  .femmes .race-card { padding:11px 0;border-bottom:1px solid black;display:flex;align-items:center;justify-content:space-between;gap:12px; }
+  .femmes .race-card:first-child { padding-top:0; }
+  .femmes .date { font-size:16px;margin-top:3px; }
+  .femmes .count { font-size:32px;font-weight:750;line-height:1;text-align:center;min-width:92px; }
+  .femmes .count small { display:block;font-size:11px;letter-spacing:1px;margin-top:5px; }
+  .femmes .results { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px; }
+  .femmes .podium { border-left:3px solid black;padding-left:10px;min-width:0; }
+  .femmes .podium h2 { font-size:15px; }
+  .femmes .winner { font-size:18px;font-weight:700;margin-top:7px;line-height:1.2; }
+  .femmes .small { font-size:12px;line-height:1.3; }
+  .femmes .gc { width:100%;border-collapse:collapse;table-layout:fixed; }
+  .femmes .gc td { padding:10px 5px;border-bottom:1px solid black;font-size:21px;vertical-align:middle; }
+  .femmes .gc .rank { width:35px;font-weight:700; }
+  .femmes .gc .gap { width:150px;text-align:right;font-size:18px; }
+  .femmes .team { display:block;font-size:12px;margin-top:3px; }
+  .femmes .notice { font-size:14px;font-weight:650; }
+</style>
+{% assign now_ts = trmnl.system.timestamp_utc | plus: 0 %}
+{% assign checked_ts = checked_at | date: '%s' | plus: 0 %}
+{% assign age = now_ts | minus: checked_ts %}
+{% assign today_utc = now_ts | date: '%Y-%m-%d' %}
+{% assign day_ts = today_utc | append: 'T00:00:00Z' | date: '%s' | plus: 0 %}
+{% assign active = nil %}
+{% assign next_races = '' %}
+{% for event in calendar %}
+  {% if today_utc >= event.start and today_utc <= event.end %}{% assign active = event %}{% endif %}
+{% endfor %}
+<div class="layout layout--col" style="padding:20px 24px 8px;">
+<div class="femmes">
+  <div class="head">
+    <div><div class="eyebrow">Women's professional cycling</div><h1>Watch the Femmes</h1></div>
+    <div class="head-note">{% if active %}Race week{% else %}On the horizon{% endif %}<br>Giro · Tour · Vuelta</div>
+  </div>
+  {% if age > 172800 %}<div class="notice">Feed overdue · last checked {{ checked_at | date: '%d %b %H:%M' }} UTC</div>{% endif %}
+  {% if active %}
+    {% assign focus = nil %}
+    {% for race in races %}{% if race.key == active.key and race.edition == active.edition %}{% assign focus = race %}{% endif %}{% endfor %}
+    <div><h2>{{ active.name | escape }} {{ active.edition }}</h2><div class="small">Latest published general classification{% if focus.stage %} · Stage {{ focus.stage }}{% endif %}</div></div>
+    {% if focus.standings.size > 0 %}
+      {% if focus.stale %}<div class="notice">Source unavailable · showing last successful results</div>{% endif %}
+      <table class="gc"><tbody>{% for rider in focus.standings limit:5 %}<tr><td class="rank">{{ rider.rank }}</td><td>{{ rider.rider | escape }}<span class="team">{{ rider.team | escape }}</span></td><td class="gap">{% if rider.rank == 1 %}Leader{% else %}{{ rider.gap | escape }}{% endif %}</td></tr>{% endfor %}</tbody></table>
+    {% else %}<h2>Awaiting {{ active.edition }} standings</h2><div class="date">Results will appear after they are published.</div>{% endif %}
+  {% else %}
+    <div>
+      {% assign shown = 0 %}
+      {% for event in calendar %}
+        {% if event.start > today_utc and shown < 3 %}
+          {% assign shown = shown | plus: 1 %}
+          {% assign start_ts = event.start | append: 'T00:00:00Z' | date: '%s' | plus: 0 %}
+          {% assign days = start_ts | minus: day_ts | divided_by: 86400 %}
+          <div class="race-card"><div><h2>{{ event.name | escape }}</h2><div class="date">{{ event.start | date: '%d %b' }} – {{ event.end | date: '%d %b %Y' }}</div></div><div class="count">{{ days }}<small>DAYS TO GO</small></div></div>
+        {% endif %}
+      {% endfor %}
+      {% if shown == 0 %}<h2>Next season's dates awaiting confirmation</h2>{% endif %}
+    </div>
+    <div class="eyebrow">Latest published GC leaders</div>
+    <div class="results">{% for race in races %}<div class="podium"><h2>{% case race.key %}{% when 'tour' %}Tour de France{% when 'giro' %}Giro Women{% else %}Vuelta Femenina{% endcase %}</h2><div class="small">{{ race.edition }}{% if race.stage %} · Stage {{ race.stage }}{% endif %}</div><div class="winner">{% if race.standings.size > 0 %}{{ race.standings.first.rider | escape }}{% else %}Unavailable{% endif %}</div>{% if race.stale %}<div class="small">Last good data · {{ race.last_success_at | date: '%d %b' }}</div>{% endif %}</div>{% endfor %}</div>
+  {% endif %}
+</div>
+</div>
+<div class="title_bar"><span class="title">Watch the Femmes</span><span class="instance">Checked {{ checked_at | date: '%d %b %H:%M' }} UTC · Official race sources</span></div>

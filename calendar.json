@@ -1,0 +1,5 @@
+[
+  {"key":"giro","name":"Giro d'Italia Women","edition":2027,"start":"2027-05-29","end":"2027-06-06","verified_at":"2026-10-18","source_url":"https://www.rcssportsandevents.it/en/event/giro-ditalia-women/"},
+  {"key":"tour","name":"Tour de France Femmes","edition":2027,"start":"2027-07-30","end":"2027-08-07","verified_at":"2026-10-18","source_url":"https://www.letourfemmes.fr/en/"},
+  {"key":"vuelta","name":"La Vuelta Femenina","edition":2027,"start":"2027-10-03","end":"2027-10-10","verified_at":"2026-10-18","source_url":"https://uci-newsroom.prgloo.com/news/uci-management-committee-met-in-montreal-and-took-several-key-decisions-for-the-2027-season-1"}
+]
