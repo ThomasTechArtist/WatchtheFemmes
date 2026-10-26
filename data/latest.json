@@ -1,7 +1,7 @@
 {
   "name": "Watch the Femmes",
   "schema_version": 1,
-  "checked_at": "2026-10-25T17:51:10.534243+00:00",
+  "checked_at": "2026-10-26T19:57:24.986455+00:00",
   "races": [
     {
       "key": "tour",
@@ -62,8 +62,8 @@
           "initials": "PC"
         }
       ],
-      "checked_at": "2026-10-25T17:51:10.534243+00:00",
-      "last_success_at": "2026-10-25T17:51:10.534243+00:00",
+      "checked_at": "2026-10-26T19:57:24.986455+00:00",
+      "last_success_at": "2026-10-26T19:57:24.986455+00:00",
       "stale": false
     },
     {
@@ -120,8 +120,8 @@
           "initials": "NF"
         }
       ],
-      "checked_at": "2026-10-25T17:51:10.534243+00:00",
-      "last_success_at": "2026-10-25T17:51:10.534243+00:00",
+      "checked_at": "2026-10-26T19:57:24.986455+00:00",
+      "last_success_at": "2026-10-26T19:57:24.986455+00:00",
       "stale": false
     },
     {
@@ -183,8 +183,8 @@
           "initials": "JB"
         }
       ],
-      "checked_at": "2026-10-25T17:51:10.534243+00:00",
-      "last_success_at": "2026-10-25T17:51:10.534243+00:00",
+      "checked_at": "2026-10-26T19:57:24.986455+00:00",
+      "last_success_at": "2026-10-26T19:57:24.986455+00:00",
       "stale": false
     }
   ],
@@ -228,7 +228,7 @@
         "end": "2027-06-06",
         "verified_at": "2026-10-18",
         "source_url": "https://www.rcssportsandevents.it/en/event/giro-ditalia-women/",
-        "days_to_go": 216,
+        "days_to_go": 215,
         "date_label": "29 May – 06 Jun 2027"
       },
       {
@@ -239,7 +239,7 @@
         "end": "2027-08-07",
         "verified_at": "2026-10-18",
         "source_url": "https://www.letourfemmes.fr/en/",
-        "days_to_go": 278,
+        "days_to_go": 277,
         "date_label": "30 Jul – 07 Aug 2027"
       },
       {
@@ -250,7 +250,7 @@
         "end": "2027-10-10",
         "verified_at": "2026-10-18",
         "source_url": "https://uci-newsroom.prgloo.com/news/uci-management-committee-met-in-montreal-and-took-several-key-decisions-for-the-2027-season-1",
-        "days_to_go": 343,
+        "days_to_go": 342,
         "date_label": "03 Oct – 10 Oct 2027"
       }
     ],
